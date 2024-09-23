@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { error } from "console";
+import { useRouter } from "next/router";
 
 const claimUsernameFormSchema = z.object({
     username: z.string().min(3, { message: 'At least 3 letters.' }).regex(/ˆ([a-z\\-]+)$/i, { message: 'Only letters and - are allowed.' }).transform(value => value.toLowerCase())
@@ -14,11 +15,15 @@ type ClaimUsernameFormData = z.infer<typeof claimUsernameFormSchema>
 
 export function ClaimUsernameForm() {
     const { register, handleSubmit, formState: { errors } } = useForm<ClaimUsernameFormData>({
-        resolver: zodResolver(claimUsernameFormSchema)
+        resolver: zodResolver(claimUsernameFormSchema),
     })
 
-    async function handleClaimUsername(data: ClaimUsernameFormData) {
+    const router = useRouter()
 
+    async function handleClaimUsername(data: ClaimUsernameFormData) {
+        const { username } = data
+
+        router.push(`/register?username=${username}`)
     }
 
     return (
