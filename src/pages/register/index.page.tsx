@@ -8,7 +8,10 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const registerFormSchema = z.object({
-    username: z.string().min(3, { message: 'At least 3 letters.' }).regex(/ˆ([a-z\\-]+)$/i, { message: 'Only letters and - are allowed.' }).transform(value => value.toLowerCase()),
+    username: z.string()
+        .min(3, { message: 'At least 3 letters.' })
+        .regex(/^([a-z\-]+)$/i, { message: 'Only letters and - are allowed.' })
+        .transform(value => value.toLowerCase()),
     name: z.string().min(3, { message: 'At least 3 letters.' })
 })
 
@@ -17,7 +20,6 @@ type RegisterFormData = z.infer<typeof registerFormSchema>
 export default function Register() {
     const { formState: { errors, isSubmitting }, register, handleSubmit, setValue } = useForm<RegisterFormData>({
         resolver: zodResolver(registerFormSchema),
-
     })
 
     const router = useRouter()
