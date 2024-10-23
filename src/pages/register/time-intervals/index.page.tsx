@@ -13,19 +13,13 @@ import { ArrowRight } from 'phosphor-react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { api } from '../../../lib/axios'
-import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
 import { getWeekDays } from '../../../utils/get-week-days'
-import { Container, Header } from '../styles'
+import { Container, FormError, Header } from '../styles'
 
-import {
-    FormError,
-    IntervalBox,
-    IntervalContainer,
-    IntervalDay,
-    IntervalInputs,
-    IntervalItem,
-} from './styles'
+
 import React from 'react'
+import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
+import { IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from './style'
 
 const timeIntervalsFormSchema = z.object({
     intervals: z
