@@ -13,13 +13,10 @@ import { ArrowRight } from 'phosphor-react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { api } from '../../../lib/axios'
-import { getWeekDays } from '../../../utils/get-week-days'
-import { Container, FormError, Header } from '../styles'
-
-
-import React from 'react'
 import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
-import { IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from './style'
+import { getWeekDays } from '../../../utils/get-week-days'
+import { Container, Header } from '../styles'
+import { FormError, IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from './style'
 
 const timeIntervalsFormSchema = z.object({
     intervals: z
@@ -34,7 +31,7 @@ const timeIntervalsFormSchema = z.object({
         .length(7)
         .transform((intervals) => intervals.filter((interval) => interval.enabled))
         .refine((intervals) => intervals.length > 0, {
-            message: 'You need to select at least one day of the week.',
+            message: 'Você precisa selecionar pelo menos um dia da semana',
         })
         .transform((intervals) => {
             return intervals.map((interval) => {
@@ -54,7 +51,7 @@ const timeIntervalsFormSchema = z.object({
             },
             {
                 message:
-                    'The end time must be at least 1 hour later than the start time.',
+                    'O horário de término deve ser pelo menos 1h distante do início.',
             },
         ),
 })
@@ -107,13 +104,14 @@ export default function TimeIntervals() {
 
     return (
         <>
-            <NextSeo title="Select Your Availability | Ignite Call" noindex />
+            <NextSeo title="Selecione sua disponibilidade | Ignite Call" noindex />
 
             <Container>
                 <Header>
-                    <Heading as="strong">Almost there</Heading>
+                    <Heading as="strong">Quase lá</Heading>
                     <Text>
-                        Set the time slots you are available for each day of the week.
+                        Defina o intervalo de horário que você está disponível em cada dia
+                        da semana.
                     </Text>
 
                     <MultiStep size={4} currentStep={3} />
@@ -167,7 +165,7 @@ export default function TimeIntervals() {
                     )}
 
                     <Button type="submit" disabled={isSubmitting}>
-                        Next Step
+                        Próximo passo
                         <ArrowRight />
                     </Button>
                 </IntervalBox>
