@@ -16,7 +16,15 @@ import { api } from '../../../lib/axios'
 import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
 import { getWeekDays } from '../../../utils/get-week-days'
 import { Container, Header } from '../styles'
-import { FormError, IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from './style'
+
+import {
+    FormError,
+    IntervalBox,
+    IntervalContainer,
+    IntervalDay,
+    IntervalInputs,
+    IntervalItem,
+} from './style'
 
 const timeIntervalsFormSchema = z.object({
     intervals: z
